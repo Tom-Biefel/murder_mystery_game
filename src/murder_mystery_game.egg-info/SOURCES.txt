@@ -3,6 +3,7 @@ pyproject.toml
 src/murder_mystery_game.egg-info/PKG-INFO
 src/murder_mystery_game.egg-info/SOURCES.txt
 src/murder_mystery_game.egg-info/dependency_links.txt
+src/murder_mystery_game.egg-info/requires.txt
 src/murder_mystery_game.egg-info/top_level.txt
 src/mysterium/__init__.py
 src/mysterium/cli.py
