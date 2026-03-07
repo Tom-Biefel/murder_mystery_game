@@ -24,8 +24,8 @@ def main():
 
     game = Game(player_name=args.name, difficulty=args.difficulty)
     print(f"\nWelcome, {args.name}! A murder has occurred at Blackwood Manor.")
-    print("You start in the Hall. Commands: go <room> | search | accuse | status | quit\n")
-
+    print("You start in the Hall. Commands: go <room> | search | accuse <suspect>, <weapon>, <room> | status | quit")
+    
     while not game.game_over:   # while loop — the entire game loop
         print(f"\n[Room: {game.player.current_room}] "
               f"[Clues: {game.player.total_clues_found}]")
@@ -33,7 +33,7 @@ def main():
         cmd = input("> ").strip()
 
         if cmd.startswith("go "):
-            room_name = cmd[3:].strip()
+            room_name = cmd[3:].strip().title()
             game.move(room_name)
 
         elif cmd == "search":
