@@ -53,6 +53,12 @@ def test_react_unknown_suspect():
     assert "No comment." in s.react()
 
 
+def test_get_alibi_contains_name_and_text(suspect):
+    alibi = suspect.get_alibi()
+    assert "Miss Scarlet" in alibi
+    assert "Lounge" in alibi
+
+
 # Magic methods
 def test_str_not_eliminated(suspect):
     assert "[ELIMINATED]" not in str(suspect)
@@ -78,6 +84,10 @@ def test_eq_different_name():
     s1 = Suspect("Miss Scarlet", "red", "cunning", "Lounge")
     s2 = Suspect("Mr. Green", "green", "nervous", "Study")
     assert s1 != s2
+
+
+def test_eq_non_suspect_returns_notimplemented(suspect):
+    assert suspect.__eq__("not a suspect") is NotImplemented
 
 
 # all_suspects list

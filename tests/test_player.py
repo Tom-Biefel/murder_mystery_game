@@ -16,7 +16,7 @@ def player():
 
 @pytest.fixture
 def clue():
-    return Clue("A red ribbon", "Miss Scarlet", 0.8)
+    return Clue("A red ribbon", "Miss Scarlet")
 
 
 # __init__
@@ -33,8 +33,11 @@ def test_player_initial_inventory_empty(player):
     assert player.inventory == []
 
 
-def test_player_initial_evidence_empty(player):
-    assert player.evidence == {}
+def test_player_initial_notebook_empty(player):
+    state = player.notebook_state()
+    assert state["crossed_suspects"] == set()
+    assert state["crossed_weapons"] == set()
+    assert state["crossed_rooms"] == set()
 
 
 # move()
@@ -60,17 +63,18 @@ def test_collect_clue_adds_to_inventory(player, clue):
     assert clue in player.inventory
 
 
-def test_collect_clue_updates_evidence(player, clue):
+def test_collect_clue_keeps_summary_points_to(player, clue):
     player.collect_clue(clue)
-    assert "Miss Scarlet" in player.evidence
+    summary = player.clues_summary()
+    assert summary[0]["points_to"] == "Miss Scarlet"
 
 
-def test_collect_clue_accumulates_weight(player):
-    c1 = Clue("Clue A", "Professor Plum", 0.6)
-    c2 = Clue("Clue B", "Professor Plum", 0.4)
+def test_collect_clue_accumulates_inventory_count(player):
+    c1 = Clue("Clue A", "Professor Plum")
+    c2 = Clue("Clue B", "Professor Plum")
     player.collect_clue(c1)
     player.collect_clue(c2)
-    assert player.evidence["Professor Plum"] == pytest.approx(1.0)
+    assert len(player.inventory) == 2
 
 
 # total_clues_found()
@@ -83,16 +87,53 @@ def test_total_clues_found_counts_correctly(player, clue):
     assert player.total_clues_found() == 1
 
 
-# evidence_summary()
-def test_evidence_summary_empty(player):
-    assert player.evidence_summary() == {}
+# clues_summary()
+def test_clues_summary_empty(player):
+    assert player.clues_summary() == []
 
 
-def test_evidence_summary_sums_to_100(player):
-    player.collect_clue(Clue("A", "Scarlet", 0.5))
-    player.collect_clue(Clue("B", "Plum", 0.5))
-    summary = player.evidence_summary()
-    assert sum(summary.values()) == pytest.approx(100.0)
+def test_clues_summary_contains_expected_fields(player):
+    player.collect_clue(Clue("A", "Scarlet", "suspect"))
+    summary = player.clues_summary()
+    assert summary[0]["description"] == "A"
+    assert summary[0]["points_to"] == "Scarlet"
+    assert summary[0]["category"] == "suspect"
+
+
+def test_cross_out_tracks_each_category(player):
+    player.cross_out("suspect", "Miss Scarlet")
+    player.cross_out("weapon", "Knife")
+    player.cross_out("room", "Kitchen")
+
+    state = player.notebook_state()
+    assert "Miss Scarlet" in state["crossed_suspects"]
+    assert "Knife" in state["crossed_weapons"]
+    assert "Kitchen" in state["crossed_rooms"]
+
+
+def test_cross_out_invalid_category_raises(player):
+    with pytest.raises(ValueError):
+        player.cross_out("pet", "Dog")
+
+
+def test_reinstate_removes_each_category(player):
+    player.cross_out("suspect", "Miss Scarlet")
+    player.cross_out("weapon", "Knife")
+    player.cross_out("room", "Kitchen")
+
+    player.reinstate("suspect", "Miss Scarlet")
+    player.reinstate("weapon", "Knife")
+    player.reinstate("room", "Kitchen")
+
+    state = player.notebook_state()
+    assert "Miss Scarlet" not in state["crossed_suspects"]
+    assert "Knife" not in state["crossed_weapons"]
+    assert "Kitchen" not in state["crossed_rooms"]
+
+
+def test_reinstate_invalid_category_raises(player):
+    with pytest.raises(ValueError):
+        player.reinstate("pet", "Dog")
 
 
 # add_note()
