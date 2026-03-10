@@ -28,8 +28,9 @@ from mysterium.models.weapon import all_weapons
 load_dotenv()
 
 # Global scope
-name_pattern  = re.compile(r"^[A-Za-z ]{2,20}$")
+name_pattern = re.compile(r"^[A-Za-z ]{2,20}$")
 env_file_path = os.path.join(os.path.dirname(__file__), ".env")
+
 
 # decorator
 def log_action(func):
@@ -46,6 +47,7 @@ def log_action(func):
         return result
     return wrapper
 
+
 # generator
 def clue_generator(clue_list, n):
     """
@@ -61,13 +63,13 @@ def clue_generator(clue_list, n):
     for clue in pool:
         yield clue
 
+
 # regex validator
 def validate_name(name):
     """
     Validate a player name using a regular expression.
     Allows letters and spaces only, between 2 and 20 characters.
-
-    Uses the global NAME_PATTERN compiled at the top of this file.
+    Uses the global name_pattern compiled at the top of this file.
 
     Raises:
         ValueError if the name does not match the pattern.
@@ -157,8 +159,8 @@ class Game:
         self.rooms = build_mansion()
         self.player = Player(player_name)
         self.case = CaseFile(
-            suspect = random.choice(ALL_SUSPECTS).name,
-            weapon = random.choice(ALL_WEAPONS).name,
+            suspect = random.choice(all_suspects).name,
+            weapon = random.choice(all_weapons).name,
             room = random.choice(list(self.rooms.keys())),
         )
         self.game_over = False
