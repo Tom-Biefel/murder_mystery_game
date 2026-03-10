@@ -159,8 +159,8 @@ class Game:
         self.rooms = build_mansion()
         self.player = Player(player_name)
         self.case = CaseFile(
-            suspect = random.choice(all_suspects).name,
-            weapon = random.choice(all_weapons).name,
+            suspect = random.choice(all_suspects).name(),
+            weapon = random.choice(all_weapons).name(),
             room = random.choice(list(self.rooms.keys())),
         )
         self.game_over = False

@@ -15,6 +15,8 @@ Python concepts covered:
 
 from collections import deque
 from datetime import datetime
+from mysterium.models.clue import get_weight()
+
 
 
 class Player:
@@ -43,8 +45,8 @@ class Player:
     def collect_clue(self, clue):
         """Add a clue to inventory and update the evidence dict."""
         self.inventory.append(clue)
-        key = clue.get_points_to
-        self.evidence[key] = self.evidence.get(key, 0) + clue.weight
+        key = clue.get_points_to()
+        self.evidence[key] = self.evidence.get(key, 0) + clue.get_weight()
 
     def add_note(self, text):
         "Let the player note down free-text notes"

@@ -15,7 +15,7 @@ Python concepts covered:
 class Weapon:
     """One of the six possible murder weapons in Blackwood Manor."""
 
-    weight_options = ["light", "medium", "heavy"]  # class attribute
+    weight_options = ["light", "medium", "heavy"]
 
     def __init__(self, name, weight_class="medium"):
         """
@@ -31,7 +31,7 @@ class Weapon:
         self._name = name
         self.weight_class = weight_class
 
-    def name(self): 
+    def name(self):
         "Return the weapon's name"
         return self._name
 
@@ -41,14 +41,14 @@ class Weapon:
 
     # Magic methods
     def __repr__(self):
-        return f"Weapon({self.__name!r}, {self.weight_class})"
+        return f"Weapon({self._name!r}, {self.weight_class})"
 
     def __str__(self):
-        return self.__name
+        return self._name
 
     def __eq__(self, other):
         if not isinstance(other, Weapon): return NotImplemented
-        return self.__name == other.__name
+        return self._name == other._name
 
 
 # all 6 weapons

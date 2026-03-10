@@ -47,7 +47,7 @@ class Suspect:
 
     def get_alibi(self):
         """Return the suspect's alibi with their name."""
-        return f"{self.__name}: \"{self.alibi}\""
+        return f"{self._name}: \"{self.alibi}\""
 
     def react(self):
         """Return an in-character reaction when accused."""
@@ -77,8 +77,8 @@ class Suspect:
 
 # all 6 suspects
 all_suspects = [
-    Suspect("Miss Scarlet", "red", "cunning","Lounge","I was in the Lounge all evening."),
-    Suspect("Colonel Mustard", "yellow", "aggressive", "Billiard Room","I was playing billiards alone."),
+    Suspect("Miss Scarlet", "red", "cunning", "Lounge", "I was in the Lounge all evening."),
+    Suspect("Colonel Mustard", "yellow", "aggressive", "Billiard Room", "I was playing billiards alone."),
     Suspect("Mrs. Peacock", "blue", "deceptive", "Conservatory", "I was tending to the orchids."),
     Suspect("Professor Plum", "purple", "intelligent", "Library", "I was reading. I never heard a thing."),
     Suspect("Mr. Green", "green", "nervous", "Study", "I was writing letters in the study."),
