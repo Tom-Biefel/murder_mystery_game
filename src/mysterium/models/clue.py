@@ -85,7 +85,7 @@ class Clue:
 
 
 # All clues available in the game
-ALL_CLUE_TEMPLATES = [
+all_clue_templates = [
     Clue("A monogrammed handkerchief with initials P.P.", "Professor Plum", 0.9),
     Clue("Reading glasses left open on the desk", "Professor Plum", 0.7),
     Clue("A red lipstick mark on a wine glass", "Miss Scarlet", 0.8),

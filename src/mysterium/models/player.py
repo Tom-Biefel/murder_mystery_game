@@ -15,8 +15,6 @@ Python concepts covered:
 
 from collections import deque
 from datetime import datetime
-from mysterium.models.clue import get_weight()
-
 
 
 class Player:
