@@ -8,7 +8,6 @@ from mysterium.models.clue import Clue
 
 
 # Fixtures
-
 @pytest.fixture
 def room():
     return Room("Library", "Dusty books everywhere.", "Professor Plum")
