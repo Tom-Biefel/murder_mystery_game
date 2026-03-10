@@ -1,0 +1,11 @@
+Metadata-Version: 2.4
+Name: mysterium
+Version: 0.1.0
+Summary: Ditigal version of the murder mystery game CLUE, adapted for Streamlit
+License: MIT
+Requires-Python: >=3.13
+Description-Content-Type: text/markdown
+Requires-Dist: python-dotenv>=1.2.2
+Requires-Dist: streamlit
+
+# murder_mystery_game
