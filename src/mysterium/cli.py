@@ -28,7 +28,7 @@ def main():
     
     while not game.game_over:   # while loop — the entire game loop
         print(f"\n[Room: {game.player.current_room}] "
-              f"[Clues: {game.player.total_clues_found}]")
+              f"[Clues: {game.player.total_clues_found()}]")
         print(f"Exits: {', '.join(game.rooms[game.player.current_room].neighbours)}")
         cmd = input("> ").strip()
 

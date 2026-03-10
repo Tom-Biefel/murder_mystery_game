@@ -1,9 +1,17 @@
 [project]
-name = "murder-mystery-game"
+name = "mysterium"
 version = "0.1.0"
-description = "Add your description here"
+description = "Ditigal version of the murder mystery game CLUE, adapted for Streamlit"
 readme = "README.md"
 requires-python = ">=3.13"
+license = { text = "MIT" }
 dependencies = [
     "python-dotenv>=1.2.2",
+     "streamlit",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.0.2",
+    "pytest-cov>=7.0.0",
 ]

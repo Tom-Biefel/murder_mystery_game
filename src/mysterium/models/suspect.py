@@ -1,81 +1,86 @@
 """
-suspect.py — One of the six murder suspects.
+suspect.py
 
-Python concepts: classes, class attributes, instance attributes,
-immutable attributes, magic methods, @property, default arguments, docstrings
+Python concepts covered:
+    - Classes and instances
+    - Class attributes (VALID_COLORS)
+    - Instance attributes (mutable: eliminated / immutable by convention: _name, _home_room)
+    - Single underscore convention (Session 12)
+    - Default arguments (alibi)
+    - Magic methods: __repr__, __str__, __eq__
+    - Docstrings
 """
+
 
 class Suspect:
     """One of the six characters who might be the murderer."""
 
-    VALID_COLORS = ["red", "yellow", "blue", "purple", "green", "white"]  # class attribute
+    valid_colors = ["red", "yellow", "blue", "purple", "green", "white"]
 
     def __init__(self, name, color, trait, home_room, alibi="No alibi provided."):
         """
         Args:
-            name:      Full name of the suspect.
-            color:     Their colour — must be in VALID_COLORS.
-            trait:     Their personality (e.g. "cunning").
+            name: Full name of the suspect.
+            color: Their color.
+            trait: Their personality (e.g. "cunning").
             home_room: The room where they live in the mansion.
-            alibi:     Their alibi statement. Default = "No alibi provided."
+            alibi: Their alibi statement. Default = "No alibi provided."
         """
-        if color not in self.VALID_COLORS:
-            raise ValueError(f"Invalid color '{color}'. Must be one of {self.VALID_COLORS}")
+        if color not in self.valid_colors:
+            raise ValueError(f"Invalid color '{color}'. Must be one of {self.valid_colors}")
 
-        self.__name      = name       # immutable (private)
-        self.__home_room = home_room  # immutable (private)
-        self.color       = color      # public
-        self.trait       = trait      # public
-        self.alibi       = alibi      # public (default argument used above)
-        self.eliminated  = False      # mutable — True when player rules them out
+        self._name = name
+        self._home_room = home_room
 
-    @property
-    def name(self): return self.__name
+        self.color = color
+        self.trait = trait
+        self.alibi = alibi
+        self.eliminated = False
 
-    @property
-    def home_room(self): return self.__home_room
+    def name(self): 
+        """Return the suspect's name."""
+        return self._name
+
+    def home_room(self): 
+        """Return the room that the suspect lives in."""
+        return self._home_room
 
     def get_alibi(self):
         """Return the suspect's alibi with their name."""
-        return f"{self.__name}: \"{self.alibi}\""
+        return f"{self._name}: \"{self.alibi}\""
 
     def react(self):
         """Return an in-character reaction when accused."""
         reactions = {
-            "Miss Scarlet":    "\"How daring of you, detective.\"",
+            "Miss Scarlet": "\"How daring of you, detective.\"",
             "Colonel Mustard": "\"Outrageous! I demand a solicitor!\"",
-            "Mrs. Peacock":    "\"I beg your pardon?\"",
-            "Professor Plum":  "\"Fascinating theory...\"",
-            "Mr. Green":       "\"I — I had nothing to do with it!\"",
-            "Mrs. White":      "\"Prove it.\"",
+            "Mrs. Peacock": "\"I beg your pardon?\"",
+            "Professor Plum": "\"Fascinating theory...\"",
+            "Mr. Green": "\"I — I had nothing to do with it!\"",
+            "Mrs. White": "\"Prove it.\"",
         }
-        return f"{self.__name}: {reactions.get(self.__name, 'No comment.')}"
+        return f"{self._name}: {reactions.get(self._name, 'No comment.')}"
 
     # Magic methods
     def __repr__(self):
-        return f"Suspect({self.__name!r}, room={self.__home_room!r})"
+        return f"Suspect({self._name!r}, room={self._home_room!r})"
 
     def __str__(self):
         status = " [ELIMINATED]" if self.eliminated else ""
-        return f"{self.__name} ({self.trait}){status}"
+        return f"{self._name} ({self.trait}){status}"
 
     def __eq__(self, other):
-        if not isinstance(other, Suspect): return NotImplemented
-        return self.__name == other.__name
+        if not isinstance(other, Suspect):
+            return NotImplemented
+        return self._name == other._name
 
 
-# All 6 suspects — import this list wherever suspects are needed
-ALL_SUSPECTS = [
-    Suspect("Miss Scarlet",    "red",    "cunning",      "Lounge",
-            "I was in the Lounge all evening."),
-    Suspect("Colonel Mustard", "yellow", "aggressive",   "Billiard Room",
-            "I was playing billiards alone."),
-    Suspect("Mrs. Peacock",    "blue",   "deceptive",    "Conservatory",
-            "I was tending to the orchids."),
-    Suspect("Professor Plum",  "purple", "intelligent",  "Library",
-            "I was reading. I never heard a thing."),
-    Suspect("Mr. Green",       "green",  "nervous",      "Study",
-            "I was writing letters in the study."),
-    Suspect("Mrs. White",      "white",  "calm",         "Kitchen",
-            "I was preparing supper. I never left."),
+# all 6 suspects
+all_suspects = [
+    Suspect("Miss Scarlet", "red", "cunning", "Lounge", "I was in the Lounge all evening."),
+    Suspect("Colonel Mustard", "yellow", "aggressive", "Billiard Room", "I was playing billiards alone."),
+    Suspect("Mrs. Peacock", "blue", "deceptive", "Conservatory", "I was tending to the orchids."),
+    Suspect("Professor Plum", "purple", "intelligent", "Library", "I was reading. I never heard a thing."),
+    Suspect("Mr. Green", "green", "nervous", "Study", "I was writing letters in the study."),
+    Suspect("Mrs. White", "white", "calm", "Kitchen", "I was preparing supper. I never left."),
 ]
