@@ -3,9 +3,6 @@ __pycache__/
 *.pyc
 .python-version
 
-#uv
-uv.lock
-
 # Virtual environment
 .venv/
 
