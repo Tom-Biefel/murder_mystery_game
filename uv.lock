@@ -321,7 +321,7 @@ wheels = [
 [[package]]
 name = "mysterium"
 version = "0.1.1"
-source = { virtual = "." }
+source = { editable = "." }
 dependencies = [
     { name = "python-dotenv" },
     { name = "streamlit" },
