@@ -7,6 +7,14 @@ from mysterium.models.room import all_rooms
 # Page setup
 st.set_page_config(page_title="Blackwood Manor", page_icon="🕯️", layout="wide")
 
+st.markdown("""
+<style>
+[data-testid="stSidebar"] { background-color: #1a1a2e; }
+[data-testid="stSidebar"] * { color: #e0d7c6 !important; }
+h1, h2, h3 { color: #c9a84c; }
+</style>
+""", unsafe_allow_html=True)
+
 suspects = [s.name() for s in all_suspects]
 weapons = [w.name() for w in all_weapons]
 rooms = [r.name for r in all_rooms]
@@ -96,7 +104,11 @@ with st.sidebar:
     st.header("📓 Detective Notebook")
 
     st.caption(f"Detective: {status['player']}")
-    st.caption(f"Clues found: {status['clues_found']}")
+    st.metric("Clues found", status['clues_found'])
+
+    if status["move_history"]:
+        history = [str(r[0]) if isinstance(r, tuple) else str(r) for r in status["move_history"][-5:]]
+        st.caption("🗺️ " + " → ".join(history))
 
     st.markdown("---")
 
@@ -125,17 +137,22 @@ col_evidence, col_room, col_accuse = st.columns([2, 2, 1.3])
 # Evidence log
 with col_evidence:
     st.subheader("Evidence Log")
-    if st.session_state.clue_log:
-        for entry in reversed(st.session_state.clue_log):
-            st.write(f"**{entry['room']}** - {entry['description']}")
-    else:
-        st.caption("No clues yet. Search a room!")
+    with st.container(border=True):
+        if st.session_state.clue_log:
+            for entry in reversed(st.session_state.clue_log):
+                st.write(f"📍 **{entry['room']}**: {entry['description']}")
+        else:
+            st.caption("No clues yet. Search a room!")
 
 # Room + movement
 with col_room:
     st.subheader("Current Location")
-    st.write(f"### {current_room}")
-    st.caption(room_obj.description)
+    with st.container(border=True):
+        st.write(f"### {current_room}")
+        st.caption(room_obj.description)
+
+    if not room_obj.clues:
+        st.caption("✓ This room has been fully searched.")
 
     if st.button("Search room"):
         found = game.search()
@@ -161,12 +178,11 @@ with col_room:
 
 # Accusation
 with col_accuse:
-    st.subheader("Make Accusation")
+    with st.expander("⚖️ Make Accusation"):
+        suspect_choice = st.selectbox("Suspect", suspects)
+        weapon_choice = st.selectbox("Weapon", weapons)
+        room_choice = st.selectbox("Room", rooms)
 
-    suspect_choice = st.selectbox("Suspect", suspects)
-    weapon_choice = st.selectbox("Weapon", weapons)
-    room_choice = st.selectbox("Room", rooms)
-
-    if st.button("Accuse"):
-        st.session_state.result = game.accuse(suspect_choice, weapon_choice, room_choice)
-        st.rerun()
+        if st.button("Accuse"):
+            st.session_state.result = game.accuse(suspect_choice, weapon_choice, room_choice)
+            st.rerun()

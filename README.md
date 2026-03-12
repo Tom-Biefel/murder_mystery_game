@@ -14,20 +14,23 @@ Explore Blackwood Manor, collect clues, and accuse the right suspect before it's
 
 ---
 
-## Installation
+## Installation & Setup
 
-### From TestPyPI
+### Option 1: From TestPyPI
 
 ```bash
 pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple/ mysterium
 ```
 
-### Local Development
+### Option 2: From GitHub (Local Development)
+
+**Requirements:** Python 3.13+, [uv](https://docs.astral.sh/uv/getting-started/installation/)
 
 ```bash
 git clone <repo-url>
 cd murder_mystery_game
 uv sync
+uv pip install -e .
 ```
 
 ---
@@ -35,7 +38,7 @@ uv sync
 ## Usage
 
 ```bash
-streamlit run src/mysterium/app.py
+streamlit run app.py
 ```
 
 **Difficulty options:** `easy` · `medium` · `hard`
