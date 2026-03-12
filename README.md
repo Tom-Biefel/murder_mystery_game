@@ -35,16 +35,6 @@ uv pip install -e .
 
 ---
 
-## Usage
-
-```bash
-streamlit run app.py
-```
-
-**Difficulty options:** `easy` · `medium` · `hard`
-
----
-
 ## Project Structure
 
 ```
@@ -72,10 +62,10 @@ tests/
 
 ```bash
 # All tests
-python -m pytest tests/ -v
+python -m pytest
 
 # With coverage report
-python -m pytest --cov=src/mysterium --cov-report=term-missing
+python -m pytest --cov
 ```
 
 ---
@@ -103,4 +93,3 @@ Candlestick · Knife · Lead Pipe · Revolver · Rope · Wrench
 
 - Python >= 3.13
 - python-dotenv
-- streamlit
