@@ -1,7 +1,7 @@
 [project]
 name = "mysterium"
-version = "0.1.0"
-description = "Ditigal version of the murder mystery game CLUE, adapted for Streamlit"
+version = "0.1.1"
+description = "Ditigal version of the murder mystery game CLUE."
 readme = "README.md"
 requires-python = ">=3.13"
 license = { text = "MIT" }
@@ -15,3 +15,13 @@ dev = [
     "pytest>=9.0.2",
     "pytest-cov>=7.0.0",
 ]
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["mysterium"]
+
+[tool.setuptools.package-dir]
+"" = "src"

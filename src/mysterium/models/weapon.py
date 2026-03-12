@@ -3,9 +3,9 @@ weapon.py
 
 Python concepts covered:
     - Classes and instances
-    - Class attributes (WEIGHT_OPTIONS)
+    - Class attributes
     - Instance attributes (mutable and immutable by convention)
-    - Single underscore convention (Session 12)
+    - Single underscore convention
     - Default arguments
     - Magic methods: __repr__, __str__, __eq__
     - Docstrings

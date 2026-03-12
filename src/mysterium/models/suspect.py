@@ -3,9 +3,9 @@ suspect.py
 
 Python concepts covered:
     - Classes and instances
-    - Class attributes (VALID_COLORS)
-    - Instance attributes (mutable: eliminated / immutable by convention: _name, _home_room)
-    - Single underscore convention (Session 12)
+    - Class attributes
+    - Instance attributes
+    - Single underscore convention
     - Default arguments (alibi)
     - Magic methods: __repr__, __str__, __eq__
     - Docstrings
@@ -22,7 +22,7 @@ class Suspect:
         Args:
             name: Full name of the suspect.
             color: Their color.
-            trait: Their personality (e.g. "cunning").
+            trait: Their personality
             home_room: The room where they live in the mansion.
             alibi: Their alibi statement. Default = "No alibi provided."
         """
@@ -56,7 +56,7 @@ class Suspect:
             "Colonel Mustard": "\"Outrageous! I demand a solicitor!\"",
             "Mrs. Peacock": "\"I beg your pardon?\"",
             "Professor Plum": "\"Fascinating theory...\"",
-            "Mr. Green": "\"I — I had nothing to do with it!\"",
+            "Mr. Green": "\"I - I had nothing to do with it!\"",
             "Mrs. White": "\"Prove it.\"",
         }
         return f"{self._name}: {reactions.get(self._name, 'No comment.')}"
@@ -75,7 +75,7 @@ class Suspect:
         return self._name == other._name
 
 
-# all 6 suspects
+# all suspects
 all_suspects = [
     Suspect("Miss Scarlet", "red", "cunning", "Lounge", "I was in the Lounge all evening."),
     Suspect("Colonel Mustard", "yellow", "aggressive", "Billiard Room", "I was playing billiards alone."),
