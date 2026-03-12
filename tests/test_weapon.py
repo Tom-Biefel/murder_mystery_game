@@ -13,7 +13,6 @@ def weapon():
 
 
 # __init__
-
 def test_weapon_name(weapon):
     assert weapon.name() == "Knife"
 

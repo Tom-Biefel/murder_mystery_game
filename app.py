@@ -2,14 +2,14 @@ import streamlit as st
 from mysterium.game import Game
 from mysterium.models.suspect import all_suspects
 from mysterium.models.weapon import all_weapons
-from mysterium.models.room import all_rooms as all_room_objects
+from mysterium.models.room import all_rooms
 
 # Page setup
 st.set_page_config(page_title="Blackwood Manor", page_icon="🕯️", layout="wide")
 
 suspects = [s.name() for s in all_suspects]
 weapons = [w.name() for w in all_weapons]
-rooms = [r.name for r in all_room_objects]
+rooms = [r.name for r in all_rooms]
 
 
 # Small helper functions

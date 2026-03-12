@@ -4,13 +4,14 @@ Tests each method of the Clue class independently.
 """
 
 import pytest
-from mysterium.models.clue import Clue, all_clue_templates as all_clue_templates
+from mysterium.models.clue import Clue, all_clue_templates
 
 
 # Fixtures
 @pytest.fixture
 def basic_clue():
     return Clue("A red ribbon on the door", "Miss Scarlet", "suspect")
+
 
 @pytest.fixture
 def weapon_clue():

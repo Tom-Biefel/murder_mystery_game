@@ -37,9 +37,8 @@ def log_action(func):
     """
     Decorator: prints the function name and a timestamp every time it is called.
     Wraps a function and modifies its default behaviour (Session 10).
-
-    Usage: place @log_action above any method to activate it.
     """
+
     def wrapper(*args, **kwargs):
         timestamp = datetime.now().strftime("%H:%M:%S")
         print(f"[{timestamp}] {func.__name__} called")
@@ -179,7 +178,6 @@ class Game:
     def _seed_clues(self):
         """
         Distribute clues evenly across all rooms using the clue_generator.
-        Each room receives at most 2 clues; every clue is placed at most once.
         """
         solution = self.case.solution()
 
@@ -233,20 +231,19 @@ class Game:
         # fill remaining slots with alternating suspect/weapon clues
         extra_pools = [
             clue_generator([c for c in suspect_clues if c not in seen], len(suspect_clues)),
-            clue_generator([c for c in weapon_clues  if c not in seen], len(weapon_clues)),
+            clue_generator([c for c in weapon_clues if c not in seen], len(weapon_clues)),
             clue_generator([c for c in room_clues if c not in seen], len(room_clues)),
         ]
         for room in rooms_list:
             slots = n - len(room.clues)
             for i in range(slots):
-                gen = extra_pools[i % 3]   # cycle: suspect → weapon → room → repeat
+                gen = extra_pools[i % 3]
                 try:
                     room.add_clue(next(gen))
                 except StopIteration:
                     pass
 
-
-    @log_action   # decorator defined above — logs every move with a timestamp
+    @log_action   # decorator defined above: logs every move with a timestamp
     def move(self, room_name):
         """
         Move the player to room_name if it is adjacent to the current room.

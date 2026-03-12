@@ -33,9 +33,9 @@ class Player:
         self.inventory = []
 
         # Notebook: sets of names the player has manually crossed out
-        self.crossed_suspects = set()   # e.g. {"Miss Scarlet", "Mr. Green"}
-        self.crossed_weapons = set()   # e.g. {"Rope", "Knife"}
-        self.crossed_rooms = set()   # e.g. {"Kitchen", "Ballroom"}
+        self.crossed_suspects = set()
+        self.crossed_weapons = set()
+        self.crossed_rooms = set()
 
         # Free-text notes
         self.notes = []
@@ -106,7 +106,7 @@ class Player:
 
     def notebook_state(self):
         """
-        Return the full notebook as a dict of sets — used by Streamlit.
+        Return the full notebook as a dict of sets.
         """
         return {
             "crossed_suspects": self.crossed_suspects,

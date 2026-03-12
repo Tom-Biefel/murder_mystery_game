@@ -8,7 +8,6 @@ from mysterium.models.clue import Clue
 
 
 # Fixtures
-
 @pytest.fixture
 def player():
     return Player("Maria")
