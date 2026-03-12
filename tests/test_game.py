@@ -130,6 +130,11 @@ def test_game_rooms_populated(game):
     assert len(game.rooms) == 11
 
 
+def test_game_hard_mode_limits_clues_per_room_to_one():
+    hard_game = Game("Maria", difficulty="hard")
+    assert all(len(room.clues) <= 1 for room in hard_game.rooms.values())
+
+
 # Game.move()
 def test_move_to_adjacent_room(game):
     result = game.move("Kitchen")
@@ -141,6 +146,12 @@ def test_move_to_non_adjacent_room(game):
     result = game.move("Wine Cellar")
     assert result is False
     assert game.player.current_room == "Hall"
+
+
+def test_move_to_secret_passage_room_succeeds(game):
+    assert game.move("Kitchen") is True
+    assert game.move("Wine Cellar") is True
+    assert game.player.current_room == "Wine Cellar"
 
 
 # Game.search()
@@ -158,6 +169,14 @@ def test_search_second_time_empty(game):
     game.search()
     result = game.search()
     assert result == []
+
+
+def test_game_cross_out_and_reinstate_delegate_to_player(game):
+    game.cross_out("suspect", "Miss Scarlet")
+    assert "Miss Scarlet" in game.player.crossed_suspects
+
+    game.reinstate("suspect", "Miss Scarlet")
+    assert "Miss Scarlet" not in game.player.crossed_suspects
 
 
 # Game.accuse()
@@ -183,7 +202,6 @@ def test_status_contains_expected_keys(game):
     assert "player" in s
     assert "room" in s
     assert "clues_found" in s
-    assert "evidence" in s
     assert "move_history" in s
     assert "game_over" in s
 

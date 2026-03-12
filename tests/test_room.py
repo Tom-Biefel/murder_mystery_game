@@ -20,7 +20,7 @@ def empty_room():
 
 @pytest.fixture
 def clue():
-    return Clue("Reading glasses on the desk", "Professor Plum", 0.7)
+    return Clue("Reading glasses on the desk", "Professor Plum")
 
 
 @pytest.fixture

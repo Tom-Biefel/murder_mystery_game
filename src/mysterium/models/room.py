@@ -14,8 +14,6 @@ Python concepts:
 
 """
 
-from mysterium.models.clue import Clue
-
 
 class Room:
     """A location in the mansion. Can hold clues and connects to neighbours."""
@@ -116,3 +114,19 @@ class SecretPassage(Room):
 
     def __repr__(self):
         return f"SecretPassage({self.name!r} -> {self.leads_to!r})"
+
+
+# all rooms
+all_rooms = [
+    Room("Kitchen", "A cold stone kitchen.", resident_suspect="Mrs. White"),
+    Room("Ballroom", "A grand ballroom, empty now."),
+    Room("Conservatory", "Glass walls, orchids everywhere.", resident_suspect="Mrs. Peacock"),
+    Room("Billiard Room", "A green baize table, untouched.", resident_suspect="Colonel Mustard"),
+    Room("Hall", "The entrance hall. Portraits watch you."),
+    Room("Library", "Shelves of dusty books.", resident_suspect="Professor Plum"),
+    Room("Lounge", "Velvet chairs, a cold fireplace.", resident_suspect="Miss Scarlet"),
+    Room("Dining Room", "A long mahogany table."),
+    Room("Study",  "Papers scattered everywhere.", resident_suspect="Mr. Green"),
+    SecretPassage("Wine Cellar", "Damp stone walls and dusty bottles.", leads_to="Kitchen"),
+    SecretPassage("Trophy Room", "Hunting trophies and faded portraits.", leads_to="Study"),
+]

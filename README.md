@@ -1,4 +1,4 @@
-# Mysterium — Murder Mystery Game
+# Mysterium: A Murder Mystery Game
 
 A digital murder mystery game inspired by **Clue/Cluedo**, built with Python.
 Explore Blackwood Manor, collect clues, and accuse the right suspect before it's too late.
@@ -9,10 +9,8 @@ Explore Blackwood Manor, collect clues, and accuse the right suspect before it's
 
 - 11 rooms to explore including secret passages
 - 6 suspects, 6 weapons, randomised solution every game
-- Evidence tracking with weighted clues
-- CLI interface for terminal play
-- Streamlit UI (coming soon)
-- 128 unit tests with full coverage
+- Evidence tracking with clue gathering
+
 
 ---
 
