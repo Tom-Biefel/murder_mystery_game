@@ -29,14 +29,13 @@ class Clue:
         if category not in self.valid_cats:
             raise ValueError(f"Category must be one of {self.valid_cats}")
 
-        # immutable (private, name-mangled)
+        # immutable
         self._description = description
         self._points_to = points_to
 
         self.category = category
         self.discovered = False
 
-    # Plain getter methods instead of @property (which wasn't covered in class)
     def get_description(self):
         """Return the clue's description text."""
         return self._description
@@ -78,7 +77,7 @@ class Clue:
 
 # All clues available in the game
 all_clue_templates = [
-    # Suspect clues: finding these CLEARLY EXONERATES that suspect
+    # Suspect clues
     Clue("Security footage confirms Professor Plum was elsewhere at the time of the crime.", "Professor Plum"),
     Clue("A verified lecture attendance sheet places Professor Plum away from the scene.", "Professor Plum"),
     Clue("Multiple witnesses confirm Miss Scarlet was seen in another wing.", "Miss Scarlet"),
@@ -92,7 +91,7 @@ all_clue_templates = [
     Clue("Mrs. White was accounted for in the kitchen under staff supervision.", "Mrs. White"),
     Clue("Kitchen staff confirm Mrs. White never left her post during the incident.", "Mrs. White"),
 
-    # Weapon clues: finding these CLEARLY EXONERATES that weapon
+    # Weapon clues
     Clue("The candlestick was inspected and shows no signs of use.", "Candlestick", "weapon"),
     Clue("The revolver was found fully loaded and unfired.", "Revolver", "weapon"),
     Clue("The rope was coiled neatly and shows no tension or fibre damage.", "Rope", "weapon"),
@@ -100,7 +99,7 @@ all_clue_templates = [
     Clue("The lead pipe was clean and undisturbed in storage.", "Lead Pipe", "weapon"),
     Clue("The wrench was accounted for in the toolbox and unused.", "Wrench", "weapon"),
 
-    # Room clues: finding these CLEARLY EXONERATES that room
+    # Room clues
     Clue("The kitchen shows no signs of struggle or disturbance.", "Kitchen", "room"),
     Clue("The ballroom floor was spotless and recently cleaned.", "Ballroom", "room"),
     Clue("The conservatory plants were undisturbed and intact.", "Conservatory", "room"),

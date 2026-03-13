@@ -37,11 +37,11 @@ class Suspect:
         self.alibi = alibi
         self.eliminated = False
 
-    def name(self): 
+    def name(self):
         """Return the suspect's name."""
         return self._name
 
-    def home_room(self): 
+    def home_room(self):
         """Return the room that the suspect lives in."""
         return self._home_room
 

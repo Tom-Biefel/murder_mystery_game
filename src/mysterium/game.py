@@ -4,7 +4,7 @@ game.py (equivalent to main.py)
 Python concepts covered:
     - Classes and instances (Game, CaseFile)
     - Composition: Game HAS Player, Rooms, CaseFile
-    - .env with python-dotenv (os.getenv)
+    - Regex
     - Decorators: @log_action applied to move()
     - Generators: clue_generator() used in _seed_clues()
     - List comprehensions
@@ -62,7 +62,6 @@ def clue_generator(clue_list, n):
         yield clue
 
 
-# regex validator
 def validate_name(name):
     """
     Validate a player name using a regular expression.
@@ -156,7 +155,7 @@ class Game:
 
         Args:
             player_name: The detective's name.
-            difficulty: "easy", "medium", or "hard". Falls back to the DIFFICULTY value in .env, then "medium".
+            difficulty: "easy", "medium", or "hard".
         """
         # validate the player name
         validate_name(player_name)
@@ -184,7 +183,7 @@ class Game:
         clues_per_room = {"easy": 3, "medium": 2, "hard": 1}
         n = clues_per_room.get(self.difficulty, 2)
 
-        # Only keep clues that do NOT point at the actual answer
+        # Only keep clues that do not point at the actual answer
         suspect_clues = [
             c for c in all_clue_templates
             if c.category == "suspect"
@@ -202,7 +201,7 @@ class Game:
             and c.get_points_to() != solution["room"]
         ]
 
-        # must-place, so every innocent suspect, weapon, and room appears at least once.
+        # must-place, so every innocent suspect, weapon, and room appears at least once
         seen = set()
         must_place = []
         for pool in (suspect_clues, weapon_clues, room_clues):
@@ -234,6 +233,7 @@ class Game:
             clue_generator([c for c in weapon_clues if c not in seen], len(weapon_clues)),
             clue_generator([c for c in room_clues if c not in seen], len(room_clues)),
         ]
+
         for room in rooms_list:
             slots = n - len(room.clues)
             for i in range(slots):
