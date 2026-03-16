@@ -8,7 +8,6 @@ Python concepts covered:
     - Datetime + strftime for timestamping moves
     - Mutable instance attributes (inventory, evidence, move_history)
     - Default arguments (start_room)
-    - **kwargs: update_profile() accepts extra keyword options
     - Magic methods: __repr__, __str__
     - Docstrings
 """
